@@ -1,0 +1,11 @@
+---
+- name: create work done file
+  ansible.builtin.file:
+    path: "{{ tomcat_homedir }}/{{ tomcat_version }}"
+    state: "touch"
+- name: restart tomcat
+  ansible.builtin.systemd_service:
+    name: tomcat
+    daemon_reload: yes
+    state: restarted
+
