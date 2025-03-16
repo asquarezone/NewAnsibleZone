@@ -1,0 +1,14 @@
+---
+java_package_name: openjdk-17-jdk
+tomcat_system_username: tomcat
+tomcat_system_groupname: tomcat
+tomcat_homedir: /opt/tomcat
+tomcat_shell: /bin/false
+tomcat_version: "10.1.39"
+tomcat_download_url: https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.39/bin/apache-tomcat-10.1.39.tar.gz
+java_home: /usr/lib/jvm/java-17-openjdk-amd64
+tomcat_admin_username: admin
+tomcat_admin_password: admin@123
+tomcat_manager_allow_ip: ".*"
+application_download_url: "https://mirror.bom.albony.in/jenkins/war-stable/2.492.2/jenkins.war"
+application_name: "jenkins.war"
