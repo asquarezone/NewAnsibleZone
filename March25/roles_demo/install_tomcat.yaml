@@ -1,0 +1,8 @@
+---
+- name: installing tomcat
+  hosts: all
+  roles:
+    - role: openjdk
+      become: yes
+    - role: tomcat
+      become: yes
