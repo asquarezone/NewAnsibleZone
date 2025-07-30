@@ -1,0 +1,10 @@
+---
+- name: install apache and php
+  become: yes
+  hosts: all
+  tasks:
+    - name: install apache and update package definitions
+      ansible.builtin.apt:
+        name: apache2
+        update_cache: yes
+        state: present
