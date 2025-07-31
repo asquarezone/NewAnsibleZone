@@ -8,3 +8,18 @@
         name: apache2
         update_cache: yes
         state: present
+    - name: enable and start apache
+      ansible.builtin.systemd_service:
+        name: apache2
+        enabled: yes
+        state: started
+    - name: install php modules
+      ansible.builtin.apt:
+        name:
+          - php
+          - libapache2-mod-php
+        state: present
+    - name: copy test php file
+      ansible.builtin.copy:
+        src: test.php
+        dest: /var/www/html/test.php
