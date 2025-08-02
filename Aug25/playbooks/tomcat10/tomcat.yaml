@@ -15,4 +15,9 @@
         home: /opt/tomcat
         shell: /bin/false
         state: present
+    - name: download and extract tomcat
+      ansible.builtin.unarchive:
+        src: https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.43/bin/apache-tomcat-10.1.43.tar.gz
+        dest: /opt/tomcat
+        remote_src: yes
     
