@@ -1,23 +1,23 @@
 ---
-- name: install tomcat 10
-  hosts: appservers
+- name: installing tomcat 10
   become: yes
+  hosts: appservers
   tasks:
-    - name: update packages and install java
+    - name: install jdk 17
       ansible.builtin.apt:
         name: openjdk-17-jdk
         update_cache: yes
         state: present
-    - name: create tomcat user
+    - name: create a user tomcat
       ansible.builtin.user:
         name: tomcat
         create_home: yes
         home: /opt/tomcat
         shell: /bin/false
         state: present
-    - name: download and extract tomcat
+    - name: extracting tomcat
       ansible.builtin.unarchive:
         src: https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.43/bin/apache-tomcat-10.1.43.tar.gz
         dest: /opt/tomcat
         remote_src: yes
-    
+        extra_opts: [ --strip-components=1 ]
