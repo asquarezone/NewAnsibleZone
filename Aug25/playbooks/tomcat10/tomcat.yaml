@@ -30,7 +30,7 @@
         group: "{{ user_name }}"
     - name: change permission of conf
       ansible.builtin.file:
-        path: /etc/foo
+        path: "{{ user_home }}/conf"
         state: directory
         recurse: yes
         mode: '0750'
