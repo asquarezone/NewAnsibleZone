@@ -3,21 +3,21 @@
   become: yes
   hosts: appservers
   tasks:
-    - name: install jdk 17
+    - name: install openjdk with "{{ java_package_name }}"
       ansible.builtin.apt:
-        name: openjdk-17-jdk
+        name: "{{ java_package_name }}"
         update_cache: yes
         state: present
     - name: create a user tomcat
       ansible.builtin.user:
-        name: tomcat
+        name: "{{ user_name }}"
         create_home: yes
-        home: /opt/tomcat
-        shell: /bin/false
+        home: "{{ user_home }}"
+        shell: "{{ user_shell }}"
         state: present
     - name: extracting tomcat
       ansible.builtin.unarchive:
-        src: https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.43/bin/apache-tomcat-10.1.43.tar.gz
-        dest: /opt/tomcat
+        src: "{{ download_url }}"
+        dest: "{{ user_home }}"
         remote_src: yes
         extra_opts: [ --strip-components=1 ]
