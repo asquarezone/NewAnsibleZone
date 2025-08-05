@@ -21,3 +21,10 @@
         dest: "{{ user_home }}"
         remote_src: yes
         extra_opts: [ --strip-components=1 ]
+    - name: recursive change ownership to tomcat
+      ansible.builtin.file:
+        path: "{{ user_home }}"
+        state: directory
+        recurse: yes
+        owner: "{{ user_name }}"
+        group: "{{ user_name }}"
