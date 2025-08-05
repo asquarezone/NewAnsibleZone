@@ -1,0 +1,28 @@
+---
+- name: testing variables
+  become: no
+  hosts: all
+  vars:
+    download_url: https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.43/bin/apache-tomcat-10.1.43.tar.gz
+  tasks:
+    - name: print the variable name package_name
+      ansible.builtin.debug:
+        var: package_name
+    - name: print the variable name download_url
+      ansible.builtin.debug:
+        var: download_url
+    - name: print the variable name variable_1
+      ansible.builtin.debug:
+        var: variable_1
+    - name: print the variable name variable_2
+      ansible.builtin.debug:
+        var: variable_2
+    - name: print the variable name variable_3
+      ansible.builtin.debug:
+        var: variable_3
+    - name: print the variable name variable_4
+      ansible.builtin.debug:
+        var: variable_4
+    - name: print the variable name variable_5
+      ansible.builtin.debug:
+        var: variable_5

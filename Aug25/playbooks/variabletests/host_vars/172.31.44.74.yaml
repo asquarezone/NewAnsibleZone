@@ -1,0 +1,3 @@
+package_name: openjdk-21-jdk
+variable_4: value_from_host_vars_node1_4
+variable_5: value_from_host_vars_node1_5

@@ -1,0 +1,3 @@
+package_name: openjdk-17-jdk
+variable_4: value_from_host_vars_localhost_4
+variable_5: value_from_host_vars_localhost_5

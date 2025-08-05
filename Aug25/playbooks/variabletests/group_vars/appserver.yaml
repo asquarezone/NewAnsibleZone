@@ -1,0 +1,3 @@
+variable_1: value_from_group_vars_1
+variable_2: value_from_group_vars_2
+variable_3: value_from_group_vars_3
