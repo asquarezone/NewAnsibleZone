@@ -28,3 +28,9 @@
         recurse: yes
         owner: "{{ user_name }}"
         group: "{{ user_name }}"
+    - name: change permission of conf
+      ansible.builtin.file:
+        path: /etc/foo
+        state: directory
+        recurse: yes
+        mode: '0750'
