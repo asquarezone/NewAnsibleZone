@@ -5,10 +5,13 @@
     - name: print all available facts
       ansible.builtin.debug:
         var: ansible_facts
+      when: ansible_facts['distribution'] == 'Ubuntu'
 
     - name: print distribution
       ansible.builtin.debug:
         var: ansible_facts['distribution']
+      when: ansible_facts['distribution'] == 'Ubuntu'
     - name: print memory
       ansible.builtin.debug:
         var: ansible_facts['memory_mb']['real']['total']
+      when: ansible_facts['distribution'] != 'Ubuntu'
