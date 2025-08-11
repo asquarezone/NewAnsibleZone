@@ -5,3 +5,10 @@
     - name: print all available facts
       ansible.builtin.debug:
         var: ansible_facts
+
+    - name: print distribution
+      ansible.builtin.debug:
+        var: ansible_facts['distribution']
+    - name: print memory
+      ansible.builtin.debug:
+        var: ansible_facts['memory_mb']
