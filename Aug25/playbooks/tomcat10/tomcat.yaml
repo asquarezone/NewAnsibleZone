@@ -34,3 +34,13 @@
         state: directory
         recurse: yes
         mode: '0750'
+    - name: create a tomcat service file
+      ansible.builtin.copy:
+        src: tomcat.service
+        dest: /etc/systemd/system/tomcat.service
+    - name: enable and start tomcat
+      ansible.builtin.systemd_service:
+        name: tomcat.service
+        daemon_reload: yes
+        state: started
+        enabled: yes
