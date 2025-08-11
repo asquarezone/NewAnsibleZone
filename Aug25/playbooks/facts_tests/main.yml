@@ -11,4 +11,4 @@
         var: ansible_facts['distribution']
     - name: print memory
       ansible.builtin.debug:
-        var: ansible_facts['memory_mb']
+        var: ansible_facts['memory_mb']['real']['total']
