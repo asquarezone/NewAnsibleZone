@@ -10,5 +10,11 @@
       ansible.builtin.debug:
         msg: "This is Redhat based os"
       when: ansible_facts['os_family'] == "RedHat"
+    - name: run this on 'Ubuntu' distribution less than 22
+      ansible.builtin.debug:
+        msg: "This is older Ubuntu"
+      when:
+        - ansible_facts['distribution'] == 'Ubuntu'
+        - ansible_facts['distribution_version'] <= 22
 
     
