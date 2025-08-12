@@ -16,5 +16,14 @@
       when:
         - ansible_facts['distribution'] == 'Ubuntu'
         - ansible_facts['distribution_version'] | int <= 22
+    - name: register info in a variable
+      ansible.builtin.stat:
+        path: /home/devops/test.txt
+      register: file_status
+    - name: print the contents of the variable
+      ansible.builtin.debug:
+        var: file_status
+    
+      
 
     
