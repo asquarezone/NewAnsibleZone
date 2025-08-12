@@ -1,0 +1,14 @@
+---
+- name: Learning conditionals
+  hosts: all
+  tasks:
+    - name: run this only on debian
+      ansible.builtin.debug:
+        msg: "This is debian based os"
+      when: ansible_facts['os_family'] == "Debian"
+    - name: run this only on redhat
+      ansible.builtin.debug:
+        msg: "This is Redhat based os"
+      when: ansible_facts['os_family'] == "RedHat"
+
+    
