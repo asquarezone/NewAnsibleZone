@@ -23,7 +23,9 @@
     - name: print the contents of the variable
       ansible.builtin.debug:
         var: file_status
-    
-      
+    - name: Run this if a file exists
+      ansible.builtin.debug:
+        msg: file exists at /home/devops/test.txt
+      when: file_status.stat.exists
 
     
