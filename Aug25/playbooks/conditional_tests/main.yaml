@@ -27,10 +27,11 @@
       ansible.builtin.debug:
         msg: file exists at /home/devops/test.txt
       when: file_status.stat.exists
-    - name: create a file
-      ansible.builtin.file:
-        path: /tmp/test.txt
-        state: file
+    - name: install tree
+      ansible.builtin.apt:
+        name: tree
+        state: present
+      when: ansible_facts['os_family'] == "Debian"
   
 
 
