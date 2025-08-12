@@ -27,5 +27,8 @@
       ansible.builtin.debug:
         msg: file exists at /home/devops/test.txt
       when: file_status.stat.exists
+    - name: Display paths of /home/devops/test.txt in dir
+      ansible.builtin.debug: msg={{ lookup('ansible.builtin.fileglob', '/home/devops/test.txt') }}
+
 
     
