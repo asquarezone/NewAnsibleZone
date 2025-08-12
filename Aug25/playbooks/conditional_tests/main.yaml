@@ -30,6 +30,7 @@
     - name: create a file
       ansible.builtin.file:
         path: /tmp/test.txt
+        state: touch
   
 
 
