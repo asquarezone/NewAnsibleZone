@@ -35,6 +35,8 @@
       notify:
         - recursive change ownership to tomcat
         - change permission of conf
+    - name: Flush handlers
+      meta: flush_handlers
     - name: create a tomcat service file
       ansible.builtin.template:
         src: tomcat.service.j2
