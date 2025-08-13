@@ -3,3 +3,4 @@ user_name: tomcat
 user_home: /opt/tomcat
 user_shell: /bin/false
 download_url: https://archive.apache.org/dist/tomcat/tomcat-10/v10.1.43/bin/apache-tomcat-10.1.43.tar.gz
+JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64
