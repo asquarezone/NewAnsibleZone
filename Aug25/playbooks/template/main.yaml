@@ -5,3 +5,6 @@
     - ansible.builtin.copy:
         src: test.txt
         dest: /tmp/test.txt
+    - ansible.builtin.template:
+        src: test.txt.j2
+        dest: /tmp/test_new.txt
