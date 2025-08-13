@@ -1,2 +1,2 @@
-java_package_name: java-17-openjdk-devel
-JAVA_HOME: /usr/lib/jvm/java-17-openjdk
+java_package_name: java-21-openjdk-devel
+JAVA_HOME: /usr/lib/jvm/java-21-openjdk
