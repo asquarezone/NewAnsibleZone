@@ -1,0 +1,7 @@
+---
+- name: testing templates
+  hosts: all
+  tasks:
+    - ansible.builtin.copy:
+        src: test.txt
+        dest: /tmp/test.txt
