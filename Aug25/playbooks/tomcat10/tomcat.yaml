@@ -40,7 +40,7 @@
         path: "{{ user_home }}/logs"
         state: directory
         recurse: yes
-        mode: '0775'
+        mode: '0766'
     - name: Flush handlers
       meta: flush_handlers
     - name: create a tomcat service file
