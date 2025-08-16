@@ -35,6 +35,12 @@
       notify:
         - recursive change ownership to tomcat
         - change permission of conf
+    - name: change permission of logs
+      ansible.builtin.file:
+        path: "{{ user_home }}/logs"
+        state: directory
+        recurse: yes
+        mode: '0755'
     - name: Flush handlers
       meta: flush_handlers
     - name: create a tomcat service file
@@ -61,3 +67,4 @@
         state: directory
         recurse: yes
         mode: '0750'
+    
