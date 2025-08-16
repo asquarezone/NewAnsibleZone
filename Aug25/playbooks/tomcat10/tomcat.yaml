@@ -40,7 +40,7 @@
       meta: flush_handlers
     - name: change permission of logs
       ansible.builtin.file:
-        path: "{{ user_home }}/logs/catalina.out"
+        path: "{{ user_home }}/logs"
         state: directory
         recurse: yes
         mode: '0766'
