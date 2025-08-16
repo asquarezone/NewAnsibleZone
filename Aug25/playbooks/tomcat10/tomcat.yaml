@@ -37,7 +37,7 @@
         - change permission of conf
     - name: change permission of logs
       ansible.builtin.file:
-        path: "{{ user_home }}/logs"
+        path: "{{ user_home }}/logs/catalina.out"
         state: directory
         recurse: yes
         mode: '0766'
