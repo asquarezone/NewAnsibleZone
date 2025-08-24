@@ -1,0 +1,13 @@
+- name: recursive change ownership to tomcat
+  ansible.builtin.file:
+    path: "{{ user_home }}"
+    state: directory
+    recurse: yes
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+- name: change permission of conf
+  ansible.builtin.file:
+    path: "{{ user_home }}/conf"
+    state: directory
+    recurse: yes
+    mode: '0750'
