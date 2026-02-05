@@ -1,0 +1,21 @@
+---
+- name: deploy website
+  hosts: all
+  become: yes
+  tasks:
+    - name: update packages
+      ansible.builtin.apt:
+         update_cache: yes
+    - name: install nginx
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+    - name: enable nginx service
+      ansible.builtin.systemd_service:
+        name: nginx
+        enabled: yes
+    - name: ensure nginx is started
+      ansible.builtin.systemd_service:
+        name: nginx
+        state: started
+       
