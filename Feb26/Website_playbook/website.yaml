@@ -13,4 +13,8 @@
         name: nginx
         enabled: yes
         state: started
-       
+    - name: download and extract website
+      ansible.builtin.unarchive:
+        src: https://templatemo.com/tm-zip-files-2020/templatemo_589_lugx_gaming.zip
+        dest: /var/www/html
+        remote_src: yes
