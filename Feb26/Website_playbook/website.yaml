@@ -3,19 +3,14 @@
   hosts: all
   become: yes
   tasks:
-    - name: update packages
-      ansible.builtin.apt:
-         update_cache: yes
-    - name: install nginx
+    - name: update packages and install nginx
       ansible.builtin.apt:
         name: nginx
+        update_cache: yes
         state: present
-    - name: enable nginx service
+    - name: enable and start nginx service
       ansible.builtin.systemd_service:
         name: nginx
         enabled: yes
-    - name: ensure nginx is started
-      ansible.builtin.systemd_service:
-        name: nginx
         state: started
        
