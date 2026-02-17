@@ -32,4 +32,11 @@
         remote_src: yes
         extra_opts:
           - --strip-components=1
+    - name: copy tomcat-users file
+      ansible.builtin.copy:
+        src: files/tomcat-users.xml
+        dest: "{{ tomcat_home_dir }}/conf/tomcat-users.xml"
+        owner: "{{ tomcat_user }}"
+        group: "{{ tomcat_group }}"
+        mode: '0600'
     
