@@ -1,0 +1,14 @@
+---
+- name: install tomcat 10
+  hosts: appserver
+  become: yes
+  tasks:
+    - name: fail if it is not ubuntu
+      ansible.builtin.fail:
+        msg: This playbook is for Ubuntu only
+      when:  ansible_facts['distribution'] != "Ubuntu"
+    - name: install java
+      ansible.builtin.apt:
+        name: "{{ java_package_name }}"
+        update_cache: yes
+        state: present
