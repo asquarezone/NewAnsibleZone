@@ -53,4 +53,14 @@
         owner: "{{ tomcat_user }}"
         group: "{{ tomcat_group }}"
         mode: '0600'
+    - name: create tomcat service 
+      ansible.builtin.template:
+        src: templates/tomcat.service.j2
+        dest: /etc/systemd/system/tomcat.service
+    - name: enable and start tomcat service
+      ansible.builtin.systemd:
+        name: tomcat
+        enabled: yes
+        state: started
+        daemon_reload: yes
     
