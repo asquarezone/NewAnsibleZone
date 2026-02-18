@@ -10,3 +10,4 @@ manager_password: manager@123
 admin_username: admin
 admin_password: admin@123
 allow_cidr: .*
+java_home: /usr/lib/jvm/java-17-openjdk-amd64
