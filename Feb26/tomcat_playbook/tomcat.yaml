@@ -39,4 +39,18 @@
         owner: "{{ tomcat_user }}"
         group: "{{ tomcat_group }}"
         mode: '0600'
+    - name: copy manager context file
+      ansible.builtin.template:
+        src: templates/context.xml.j2
+        dest: "{{ tomcat_home_dir }}/webapps/manager/META-INF/context.xml"
+        owner: "{{ tomcat_user }}"
+        group: "{{ tomcat_group }}"
+        mode: '0600'
+    - name: copy host-manager context file
+      ansible.builtin.template:
+        src: templates/context.xml.j2
+        dest: "{{ tomcat_home_dir }}/webapps/host-manager/META-INF/context.xml"
+        owner: "{{ tomcat_user }}"
+        group: "{{ tomcat_group }}"
+        mode: '0600'
     
