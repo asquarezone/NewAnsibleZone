@@ -45,6 +45,8 @@
         owner: "{{ tomcat_user }}"
         group: "{{ tomcat_group }}"
         mode: '0600'
+      notify:
+        - enable and start tomcat service
     - name: copy manager context file
       ansible.builtin.template:
         src: templates/context.xml.j2
@@ -52,6 +54,8 @@
         owner: "{{ tomcat_user }}"
         group: "{{ tomcat_group }}"
         mode: '0600'
+      notify:
+        - enable and start tomcat service
     - name: copy host-manager context file
       ansible.builtin.template:
         src: templates/context.xml.j2
@@ -59,14 +63,24 @@
         owner: "{{ tomcat_user }}"
         group: "{{ tomcat_group }}"
         mode: '0600'
+      notify:
+        - enable and start tomcat service
     - name: create tomcat service 
       ansible.builtin.template:
         src: templates/tomcat.service.j2
         dest: /etc/systemd/system/tomcat.service
-    - name: enable and start tomcat service
+      notify:
+        - enable and start tomcat service
+    - name: ensure tomcat is running
       ansible.builtin.systemd:
         name: tomcat
         enabled: yes
         state: started
+  handlers:
+    - name: enable and start tomcat service
+      ansible.builtin.systemd:
+        name: tomcat
+        enabled: yes
+        state: restarted
         daemon_reload: yes
     
