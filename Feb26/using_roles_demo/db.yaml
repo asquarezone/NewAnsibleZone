@@ -1,0 +1,9 @@
+---
+- name: install mysql
+  hosts: dbserver
+  roles:
+    - role: geerlingguy.mysql
+      become: true
+      vars:
+        mysql_root_password: admin123
+        mysql_user_name: ltdevops
