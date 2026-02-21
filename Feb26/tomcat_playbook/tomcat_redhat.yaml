@@ -1,0 +1,85 @@
+---
+- name: install tomcat 10
+  hosts: redhat
+  become: yes
+  tasks:
+    - name: fail if it is not ubuntu
+      ansible.builtin.fail:
+        msg: This playbook is for RedHat only
+      when:  ansible_facts['distribution'] != "RedHat"
+    - name: install java
+      ansible.builtin.dnf:
+        name: "{{ java_package_name }}"
+        state: present
+    - name: create a tomcat group
+      ansible.builtin.group:
+        name: "{{ tomcat_group }}"
+        state: present
+    - name: create a tomcat group
+      ansible.builtin.user:
+        name: "{{ tomcat_user }}"
+        create_home: yes
+        group: "{{ tomcat_group }}"
+        home: "{{ tomcat_home_dir }}"
+        shell: "{{ tomcat_shell }}"
+    # try downloading if /opt/tomcat/bin folder doesnot exist
+    - name: check for bin folder
+      ansible.builtin.stat:
+        path: "{{ tomcat_home_dir }}/bin"
+      register: bin_folder
+    - name: download and extract tomcat
+      ansible.builtin.unarchive:
+        src: "{{ tomcat_download_url }}"
+        dest: "{{ tomcat_home_dir }}"
+        owner: "{{ tomcat_user }}"
+        group: "{{ tomcat_group }}"
+        remote_src: yes
+        extra_opts:
+          - --strip-components=1
+      when: bin_folder.stat.exists == false
+    - name: copy tomcat-users file
+      ansible.builtin.template:
+        src: templates/tomcat-users.xml.j2
+        dest: "{{ tomcat_home_dir }}/conf/tomcat-users.xml"
+        owner: "{{ tomcat_user }}"
+        group: "{{ tomcat_group }}"
+        mode: '0600'
+      notify:
+        - enable and start tomcat service
+    - name: copy manager context file
+      ansible.builtin.template:
+        src: templates/context.xml.j2
+        dest: "{{ tomcat_home_dir }}/webapps/manager/META-INF/context.xml"
+        owner: "{{ tomcat_user }}"
+        group: "{{ tomcat_group }}"
+        mode: '0600'
+      notify:
+        - enable and start tomcat service
+    - name: copy host-manager context file
+      ansible.builtin.template:
+        src: templates/context.xml.j2
+        dest: "{{ tomcat_home_dir }}/webapps/host-manager/META-INF/context.xml"
+        owner: "{{ tomcat_user }}"
+        group: "{{ tomcat_group }}"
+        mode: '0600'
+      notify:
+        - enable and start tomcat service
+    - name: create tomcat service 
+      ansible.builtin.template:
+        src: templates/tomcat.service.j2
+        dest: /etc/systemd/system/tomcat.service
+      notify:
+        - enable and start tomcat service
+    - name: ensure tomcat is running
+      ansible.builtin.systemd:
+        name: tomcat
+        enabled: yes
+        state: started
+  handlers:
+    - name: enable and start tomcat service
+      ansible.builtin.systemd:
+        name: tomcat
+        enabled: yes
+        state: restarted
+        daemon_reload: yes
+    
