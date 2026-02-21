@@ -3,15 +3,21 @@
   hosts: appserver
   become: yes
   tasks:
-    - name: fail if it is not ubuntu
+    - name: fail if it is not ubuntu and redhat
       ansible.builtin.fail:
-        msg: This playbook is for Ubuntu only
-      when:  ansible_facts['distribution'] != "Ubuntu"
-    - name: install java
+        msg: This playbook is for Ubuntu and Redhat only
+      when:  ansible_facts['distribution'] != "Ubuntu" and ansible_facts['distribution'] != "RedHat"
+    - name: install java using apt
       ansible.builtin.apt:
         name: "{{ java_package_name }}"
         update_cache: yes
         state: present
+      when:  ansible_facts['distribution'] == "Ubuntu"
+    - name: install java using dnf
+      ansible.builtin.dnf:
+        name: "{{ java_package_name }}"
+        state: present
+      when: ansible_facts['distribution'] == "RedHat"
     - name: create a tomcat group
       ansible.builtin.group:
         name: "{{ tomcat_group }}"
