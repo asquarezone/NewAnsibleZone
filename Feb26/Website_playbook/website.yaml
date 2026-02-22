@@ -2,19 +2,26 @@
 - name: deploy website
   hosts: all
   become: yes
+  vars:
+    website_url: https://templatemo.com/tm-zip-files-2020/templatemo_589_lugx_gaming.zip
+    webserver_package: nginx
   tasks:
     - name: update packages and install nginx
       ansible.builtin.apt:
-        name: nginx
+        name: "{{ webserver_package }}"
         update_cache: yes
         state: present
     - name: enable and start nginx service
       ansible.builtin.systemd_service:
-        name: nginx
+        name: "{{ webserver_package }}"
         enabled: yes
         state: started
+    - name: install unzip
+      ansible.builtin.apt:
+        name: unzip
+        state: present
     - name: download and extract website
       ansible.builtin.unarchive:
-        src: https://templatemo.com/tm-zip-files-2020/templatemo_589_lugx_gaming.zip
+        src: "{{ website_url }}"
         dest: /var/www/html
         remote_src: yes
